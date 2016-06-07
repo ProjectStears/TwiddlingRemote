@@ -5,9 +5,30 @@ public class Sender : MonoBehaviour
 {
     private string url = "http://aspepex.net/twiddle/setdata-34g0234knas.php";
 
+    private string idleurl = "http://aspepex.net/twiddle/twiddledata-23we4asdg76.txt";
+    private int lastSecond;
+
+    private WWW idlePoller;
+
     void Start()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        idlePoller = new WWW(idleurl);
+    }
+
+    void Update()
+    {
+        if (lastSecond != Mathf.RoundToInt(Time.deltaTime) && idlePoller.isDone)
+        {
+            lastSecond = Mathf.RoundToInt(Time.deltaTime);
+            StartCoroutine(IdlePoll());
+        }
+    }
+
+    IEnumerator IdlePoll()
+    {
+        idlePoller = new WWW(idleurl);
+        yield return idlePoller;
     }
 
     public void Begin()
