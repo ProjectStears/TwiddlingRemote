@@ -6,9 +6,24 @@ public class Sender : MonoBehaviour
     private string url = "http://aspepex.net/twiddle/setdata-34g0234knas.php";
 
     private string idleurl = "http://aspepex.net/twiddle/twiddledata-23we4asdg76.txt";
+
+    private string starturl = "http://aspepex.net/twiddle/setbegin-34g0234knas.php";
+    private string warnurl = "http://aspepex.net/twiddle/setwarn-34g0234knas.php";
+    private string crashurl = "http://aspepex.net/twiddle/setcrash-34g0234knas.php";
+    private string nocrashurl = "http://aspepex.net/twiddle/setnocrash-34g0234knas.php";
+    private string customurl = "http://aspepex.net/twiddle/setcustom-34g0234knas.php";
+    private string endurl = "http://aspepex.net/twiddle/setend-34g0234knas.php";
+
     private int lastSecond;
 
     private WWW idlePoller;
+
+    private WWW startWww;
+    private WWW warnWww;
+    private WWW crashWww;
+    private WWW nocrashWww;
+    private WWW customWww;
+    private WWW endWww;
 
     void Start()
     {
@@ -18,9 +33,11 @@ public class Sender : MonoBehaviour
 
     void Update()
     {
-        if (lastSecond != Mathf.RoundToInt(Time.deltaTime) && idlePoller.isDone)
+        int thissecond = Mathf.RoundToInt(Time.deltaTime);
+
+        if (lastSecond != thissecond && idlePoller.isDone)
         {
-            lastSecond = Mathf.RoundToInt(Time.deltaTime);
+            lastSecond = thissecond;
             StartCoroutine(IdlePoll());
         }
     }
@@ -38,24 +55,19 @@ public class Sender : MonoBehaviour
 
     private IEnumerator BeginCr()
     {
-        WWWForm form = new WWWForm();
-        form.AddField("command", "Loslaufen");
-
-        WWW www = new WWW(url, form);
-        yield return www;
+        startWww = new WWW(starturl);
+        yield return startWww;
     }
 
     public void Warn()
     {
         StartCoroutine(WarnCr());
     }
+
     private IEnumerator WarnCr()
     {
-        WWWForm form = new WWWForm();
-        form.AddField("command", "Warnung");
-
-        WWW www = new WWW(url, form);
-        yield return www;
+        warnWww = new WWW(warnurl);
+        yield return warnWww;
     }
 
 
@@ -66,11 +78,8 @@ public class Sender : MonoBehaviour
 
     private IEnumerator CrashCr()
     {
-        WWWForm form = new WWWForm();
-        form.AddField("command", "Crash");
-
-        WWW www = new WWW(url, form);
-        yield return www;
+        crashWww = new WWW(crashurl);
+        yield return crashWww;
     }
 
 
@@ -81,11 +90,8 @@ public class Sender : MonoBehaviour
 
     private IEnumerator NoCrashCr()
     {
-        WWWForm form = new WWWForm();
-        form.AddField("command", "NoCrash");
-
-        WWW www = new WWW(url, form);
-        yield return www;
+        nocrashWww = new WWW(nocrashurl);
+        yield return nocrashWww;
     }
 
 
@@ -96,11 +102,8 @@ public class Sender : MonoBehaviour
 
     private IEnumerator CustomCr()
     {
-        WWWForm form = new WWWForm();
-        form.AddField("command", "Custom");
-
-        WWW www = new WWW(url, form);
-        yield return www;
+        customWww = new WWW(customurl);
+        yield return customWww;
     }
 
 
@@ -111,10 +114,7 @@ public class Sender : MonoBehaviour
 
     private IEnumerator EndCr()
     {
-        WWWForm form = new WWWForm();
-        form.AddField("command", "Ende");
-
-        WWW www = new WWW(url, form);
-        yield return www;
+        endWww = new WWW(endurl);
+        yield return endWww;
     }
 }
