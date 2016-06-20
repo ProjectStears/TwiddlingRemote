@@ -3,16 +3,14 @@ using System.Collections;
 
 public class Sender : MonoBehaviour
 {
-    private string url = "http://aspepex.net/twiddle/setdata-34g0234knas.php";
+    private string idleurl = "http://srv.aspepex.net/twiddle/twiddledata-23we4asdg76.txt";
 
-    private string idleurl = "http://aspepex.net/twiddle/twiddledata-23we4asdg76.txt";
-
-    private string starturl = "http://aspepex.net/twiddle/setbegin-34g0234knas.php";
-    private string warnurl = "http://aspepex.net/twiddle/setwarn-34g0234knas.php";
-    private string crashurl = "http://aspepex.net/twiddle/setcrash-34g0234knas.php";
-    private string nocrashurl = "http://aspepex.net/twiddle/setnocrash-34g0234knas.php";
-    private string customurl = "http://aspepex.net/twiddle/setcustom-34g0234knas.php";
-    private string endurl = "http://aspepex.net/twiddle/setend-34g0234knas.php";
+    private string starturl = "http://srv.aspepex.net/twiddle/setbegin-34g0234knas.php";
+    private string warnurl = "http://srv.aspepex.net/twiddle/setwarn-34g0234knas.php";
+    private string crashurl = "http://srv.aspepex.net/twiddle/setcrash-34g0234knas.php";
+    private string nocrashurl = "http://srv.aspepex.net/twiddle/setnocrash-34g0234knas.php";
+    private string customurl = "http://srv.aspepex.net/twiddle/setcustom-34g0234knas.php";
+    private string endurl = "http://srv.aspepex.net/twiddle/setend-34g0234knas.php";
 
     private int lastSecond;
 
